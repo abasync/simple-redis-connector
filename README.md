@@ -1,12 +1,9 @@
 <h1 align="center">
-  <br>
-  <img src="./.github/assets/icon.png" alt="Kroo" width="200">
-  <br>
   Simple Redis Connector
   <br>
 </h1>
 
-<h4 align="center">The Kroo.Work PnP (Plug and Play) Redis Connector!</h4>
+<h4 align="center">The <a href="https://github.com/kroo-work/" target="_blank">Kroo.Work</a> PnP (Plug and Play) Redis Connector!</h4>
 
 <p align="center">
   <a href="#how-to-use">How To Use</a> •
