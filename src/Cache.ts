@@ -106,6 +106,10 @@ export class Cache {
 
   static getInstance(): Redis | Cluster {
     try {
+      if (cacheConfig.ignore) {
+        return null;
+      }
+      
       if (!this.redisInstance) {
         const config = this.getConfig();
 
