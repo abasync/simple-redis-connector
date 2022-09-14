@@ -1,8 +1,12 @@
 {
   "name": "simple-redis-connector",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple Redis connector for easy caching",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kroo-work/simple-redis-connector"
+  },
   "author": "Kroo.Work",
   "license": "MIT",
   "keywords": [
