@@ -1,6 +1,6 @@
 {
   "name": "simple-redis-connector",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple Redis connector for easy caching",
   "main": "dist/index.js",
   "repository": {
@@ -16,16 +16,13 @@
     "kroo"
   ],
   "dependencies": {
-    "bluebird": "^3.7.2",
-    "ioredis": "^4.27.9"
+    "ioredis": "^5.2.3"
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.36",
-    "@types/ioredis": "^4.27.2",
     "@types/node": "^16.9.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
