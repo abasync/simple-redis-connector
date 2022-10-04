@@ -1,4 +1,3 @@
-import Bluebird from 'bluebird';
 import IORedis, {
   Cluster,
   ClusterNode,
@@ -28,12 +27,11 @@ export const cacheConfig: CacheCredentials = {
   port: Number(process.env.REDIS_PORT) || 6379,
   keyPrefix: process.env.REDIS_PREFIX,
   password: process.env.REDIS_PASSWORD,
-  isCluster: (process.env.REDIS_CLUSTER == 'true'),
+  isCluster: process.env.REDIS_CLUSTER == 'true',
   requestTimeout: Number(process.env.REDIS_REQUEST_TIMEOUT) || 300,
   connectTimeout: Number(process.env.REDIS_CONNECT_TIMEOUT) || 200,
-  ignore: (process.env.REDIS_IGNORE == 'true'),
+  ignore: process.env.REDIS_IGNORE == 'true',
 };
-
 
 export class Cache {
   static #redisInstance: Redis | Cluster;
@@ -65,7 +63,7 @@ export class Cache {
   }
 
   static getConfig(): CacheOptions {
-    const credentials = {...cacheConfig}
+    const credentials = { ...cacheConfig };
 
     const { isCluster, requestTimeout } = credentials;
 
@@ -109,12 +107,9 @@ export class Cache {
       if (cacheConfig.ignore) {
         return null;
       }
-      
+
       if (!this.redisInstance) {
         const config = this.getConfig();
-
-        // @ts-ignore
-        IORedis.Promise = Bluebird;
 
         if (this.isCluster) {
           this.redisInstance = new Cluster(config.nodes, config.options);
@@ -140,10 +135,9 @@ export class Cache {
         return null;
       }
 
-      const redisPromise = (redisInstance.get(key) as Bluebird<string>).timeout(
-        this.requestTimeout,
-        'ERR_TIMEOUT',
-      );
+      const redisPromise = redisInstance
+        .get(key)
+        .timeout(this.requestTimeout, 'ERR_TIMEOUT');
 
       const data = await redisPromise;
 
@@ -158,7 +152,8 @@ export class Cache {
   static async set(
     key: string,
     data: any,
-    secondsToExpire: number = 7200): Promise<'OK'> {
+    secondsToExpire: number = 7200,
+  ): Promise<'OK'> {
     try {
       const redisInstance = this.getInstance();
 
@@ -168,14 +163,9 @@ export class Cache {
 
       const encodedData: string = JSON.stringify(data);
 
-      const redisPromise = (
-        redisInstance.set(
-          key,
-          encodedData,
-          'EX',
-          secondsToExpire,
-        ) as Bluebird<'OK'>
-      ).timeout(this.requestTimeout, 'ERR_TIMEOUT');
+      const redisPromise = await redisInstance
+        .set(key, encodedData, 'EX', secondsToExpire)
+        .timeout(this.requestTimeout, 'ERR_TIMEOUT');
 
       return redisPromise;
     } catch (error) {
@@ -191,10 +181,9 @@ export class Cache {
         return null;
       }
 
-      const redisPromise = (redisInstance.del(key) as Bluebird<number>).timeout(
-        this.requestTimeout,
-        'ERR_TIMEOUT',
-      );
+      const redisPromise = await redisInstance
+        .del(key)
+        .timeout(this.requestTimeout, 'ERR_TIMEOUT');
 
       return redisPromise;
     } catch (error) {
@@ -204,12 +193,12 @@ export class Cache {
 
   private static handleError(error) {
     if (error.message !== 'ERR_TIMEOUT') {
-      this.disconnect()
+      this.disconnect();
     }
     return null;
   }
 
   private static disconnect() {
-      this.#redisInstance = null;
+    this.#redisInstance = null;
   }
 }
