@@ -127,7 +127,7 @@ export class Cache {
     }
   }
 
-  static async get(key: string): Promise<any> {
+  static async get<T>(key: string): Promise<T | null> {
     try {
       const redisInstance = this.getInstance();
 
@@ -153,7 +153,7 @@ export class Cache {
     key: string,
     data: any,
     secondsToExpire: number = 7200,
-  ): Promise<'OK'> {
+  ): Promise<'OK' | null> {
     try {
       const redisInstance = this.getInstance();
 
@@ -173,7 +173,7 @@ export class Cache {
     }
   }
 
-  static async del(key: string): Promise<number> {
+  static async del(key: string): Promise<number | null> {
     try {
       const redisInstance = this.getInstance();
 
@@ -191,14 +191,14 @@ export class Cache {
     }
   }
 
-  private static handleError(error) {
+  private static handleError(error): null {
     if (error.message !== 'ERR_TIMEOUT') {
       this.disconnect();
     }
     return null;
   }
 
-  private static disconnect() {
+  private static disconnect(): void {
     this.#redisInstance = null;
   }
 }
