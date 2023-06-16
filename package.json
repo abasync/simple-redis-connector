@@ -1,6 +1,6 @@
 {
   "name": "simple-redis-connector",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple Redis connector for easy caching",
   "main": "dist/index.js",
   "repository": {
