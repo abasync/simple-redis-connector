@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - run: yarn
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
