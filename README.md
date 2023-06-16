@@ -42,7 +42,6 @@ $ yarn add simple-redis-connector
 This application uses the following open source packages:
 
 - [ioredis](https://ioredis.readthedocs.io/en/latest/API/)
-- [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
 
 ## License
 
