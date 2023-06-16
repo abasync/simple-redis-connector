@@ -173,7 +173,7 @@ export class Cache {
     }
   }
 
-  static async del(key: string): Promise<number | null> {
+  static async del(keys: string | string[]): Promise<number | null> {
     try {
       const redisInstance = this.getInstance();
 
@@ -181,8 +181,10 @@ export class Cache {
         return null;
       }
 
+      const keysToDelete = Array.isArray(keys) ? keys : [keys];
+
       const redisPromise = await redisInstance
-        .del(key)
+        .del(...keysToDelete)
         .timeout(this.requestTimeout, 'ERR_TIMEOUT');
 
       return redisPromise;
