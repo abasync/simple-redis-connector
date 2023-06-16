@@ -181,7 +181,7 @@ export class Cache {
         return null;
       }
 
-      const keysToDelete = this.keysToDeleteMapper(keys);
+      const keysToDelete = Array.isArray(keys) ? keys : [keys];
 
       const redisPromise = await redisInstance
         .del(...keysToDelete)
@@ -202,13 +202,5 @@ export class Cache {
 
   private static disconnect(): void {
     this.#redisInstance = null;
-  }
-
-  private static keysToDeleteMapper(keys: string | string[]): string[] {
-    if (typeof keys === 'string') {
-      return [keys];
-    }
-
-    return keys;
   }
 }
