@@ -6,3 +6,4 @@ node_modules/
 .prettierrc
 tsconfig.json
 *.log
+.github/

@@ -1,11 +1,11 @@
 {
   "name": "simple-redis-connector",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A simple Redis helper for easy caching with ioredis",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abasync/simple-redis-connector"
+    "url": "git+https://github.com/abasync/simple-redis-connector.git"
   },
   "author": "ABASync",
   "license": "MIT",
