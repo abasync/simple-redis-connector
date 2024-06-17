@@ -3,7 +3,7 @@
   <br>
 </h1>
 
-<h4 align="center">The <a href="https://github.com/kroo-work/" target="_blank">Kroo.Work</a> PnP (Plug and Play) Redis Connector!</h4>
+<h4 align="center">The <a href="https://github.com/abasync/" target="_blank">ABASync</a> PnP (Plug and Play) Redis Helper!</h4>
 
 <p align="center">
   <a href="#how-to-use">How To Use</a> •
